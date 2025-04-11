@@ -11,5 +11,8 @@
   "scripts": {
     "build": "bun build --outdir=dist --minify index.html",
     "dev": "bun --hot index.html"
+  },
+  "dependencies": {
+    "preact": "^10.26.5"
   }
 }
