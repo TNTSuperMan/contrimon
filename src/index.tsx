@@ -1,9 +1,11 @@
 import { render } from "preact";
-import Router from "preact-router";
+import Router, { Route } from "preact-router";
+
+import index from "./pages/index";
 
 const main = () => 
     render(<Router>
-        
+        <Route path="/" component={index}/>
     </Router>, document.body);
 
 document.readyState == "loading" ?
