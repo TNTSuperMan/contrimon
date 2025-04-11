@@ -1,3 +1,4 @@
+import "./style/main.css";
 import { render } from "preact";
 import Router, { Route } from "preact-router";
 
