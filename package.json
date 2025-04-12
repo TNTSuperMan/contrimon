@@ -9,7 +9,7 @@
     "typescript": "^5"
   },
   "scripts": {
-    "build": "bun build --outdir=dist --minify index.html",
+    "build": "mkdir -p dist && rm -r dist && bun build --outdir=dist --minify index.html",
     "dev": "bun --hot index.html"
   },
   "dependencies": {
