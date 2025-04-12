@@ -17,6 +17,6 @@ export default () => {
             </>
         }
     }
-    location.href = `${SERVER}/oauth?code=${param.get("code")}`;
+    location.href = `${SERVER}/oauth/${param.get("code")}`;
     return <h1>リダイレクト中...</h1>
 };
