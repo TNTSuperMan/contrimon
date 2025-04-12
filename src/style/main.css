@@ -5,7 +5,7 @@ body{
     align-content: center;
     align-items: center;
 }
-button{
+.btn{
     margin: 10px;
     padding: 10px;
     font-size: 20px;
@@ -16,6 +16,6 @@ button{
     transition: all 0.3s ease;
     cursor: pointer;
 }
-button:hover{
+.btn:hover{
     background: #333;
 }
