@@ -5,3 +5,17 @@ body{
     align-content: center;
     align-items: center;
 }
+button.start{
+    margin: 10px;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 20px;
+    background: #000;
+    color: #fff;
+    border: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+button.start:hover{
+    background: #333;
+}
