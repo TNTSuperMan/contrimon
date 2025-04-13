@@ -15,6 +15,6 @@ export const Contrimon = ({contributes}: {contributes: Error | ContributesState 
 
     return <div class="contrimon">
         <p>{msg}</p>
-        <div><span>{face}</span></div>
+        <span>{face}</span>
     </div>
 }

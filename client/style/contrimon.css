@@ -12,14 +12,11 @@
         font-size: 15px;
         border-radius: 10px;
     }
-    div{
+    span{
         background: #fff;
         color: #000;
         border-radius: 7px;
-        cursor: pointer;
         padding: 5px;
-        span{
-            pointer-events: none;
-        }
+        user-select: none;
     }
 }
