@@ -1,5 +1,6 @@
-import { Link } from "preact-router";
+import { Link, route } from "preact-router";
 import { SERVER } from "../../env";
+import { useEffect, useState } from "preact/hooks";
 
 export default () => {
     const param = new URLSearchParams(location.search);
@@ -17,6 +18,15 @@ export default () => {
             </>
         }
     }
-    location.href = `${SERVER}/oauth/${param.get("code")}`;
-    return <h1>リダイレクト中...</h1>
+    const [state, setState] = useState("読込中...");
+    useEffect(()=>{
+        console.log("start")
+        fetch(new URL(`/oauth/${param.get("code")}`, SERVER))
+            .then(async e=>{
+                if(!e.ok) return setState("OAuth認証に失敗しました: " + await e.text());
+                localStorage.setItem("token", await e.text());
+                route("/home")
+            })
+    }, []);
+    return <h1>{state}</h1>
 };
