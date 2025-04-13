@@ -21,6 +21,6 @@ app.use("*", (c,n) => cors({
 })(c,n))
 
 app.use("/user/*", async(c,n) => 
-    jwt({ secret: getEnv(c, "SECRET"), cookie: "token" })(c, n));
+    jwt({ secret: getEnv(c, "SECRET")})(c, n));
 
 export default app;
