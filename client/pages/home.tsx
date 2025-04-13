@@ -72,7 +72,7 @@ export default ()=>{
                         {contributes.data.user.contributionsCollection.totalPullRequestContributions}
                     </div>
                     <div class="issue" title="Issue">
-                        {contributes.data.user.contributionsCollection.totalCommitContributions}
+                        {contributes.data.user.contributionsCollection.totalIssueContributions}
                     </div>
                     <div class="repo" title="新規リポジトリ">
                         {contributes.data.user.contributionsCollection.totalRepositoryContributions}
