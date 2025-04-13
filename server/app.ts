@@ -7,7 +7,9 @@ const app = new Hono<{ Bindings: {
     CLIENT_SECRET: string,
     CLIENT: string,
     SECRET: string
-}, Variables: JwtVariables<string>}>();
+}, Variables: JwtVariables<{
+    token: string
+}>}>();
 
 app.use("/user/*", async(c,n) => 
     jwt({ secret: getEnv(c, "SECRET") })(c, n));
