@@ -1,5 +1,6 @@
 import { HTTPException } from "hono/http-exception";
 import app from "./app";
+import { getEnv } from "./utils/env";
 
 app.get("/oauth/:code", async c=>{
     const { code } = c.req.param();
@@ -8,9 +9,9 @@ app.get("/oauth/:code", async c=>{
         "https://github.com/login/oauth/access_token", {
             method: "POST",
             body: JSON.stringify({ code,
-                client_id: c.env.CLIENT_ID,
-                client_secret: c.env.CLIENT_SECRET,
-                redirect_uri: `${c.env.CLIENT}/home`
+                client_id: getEnv(c, "CLIENT_ID"),
+                client_secret: getEnv(c, "CLIENT_SECRET"),
+                redirect_uri: `${getEnv(c, "CLIENT")}/home`
             }),
             headers: {
                 "Content-type": "application/json",
@@ -22,5 +23,5 @@ app.get("/oauth/:code", async c=>{
     const { access_token } = await res.json();
     c.set("jwtPayload", access_token);
     
-    return c.redirect(`${c.env.CLIENT}/home`);
+    return c.redirect(`${getEnv(c, "CLIENT")}/home`);
 });
