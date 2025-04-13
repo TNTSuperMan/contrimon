@@ -5,7 +5,8 @@ import { route } from "preact-router";
 export default ()=>{
     const [info, setInfo] = useState<Error|{
         avatar_url: string,
-        name: string
+        name: string,
+        html_url: string
     }>();
     useEffect(()=>{
         const jwt = localStorage.getItem("token");
@@ -31,7 +32,11 @@ export default ()=>{
         </>;
     }
     return <div class="home">
-        <img src={info.avatar_url} alt={info.name} />
-        <h1>ようこそ {info.name}さん</h1>
+        <div className="bar">
+            <a href={info.html_url} target="_blank">
+                <img src={info.avatar_url} alt={info.name} />
+            </a>
+            ようこそ {info.name}さん
+        </div>
     </div>
 }
