@@ -1,6 +1,8 @@
 import { HTTPException } from "hono/http-exception";
 import app from "./app";
 import { getEnv } from "./utils/env";
+import { sign, verify } from "hono/jwt";
+import { setCookie } from "hono/cookie";
 
 app.get("/oauth/:code", async c=>{
     const { code } = c.req.param();
@@ -20,8 +22,8 @@ app.get("/oauth/:code", async c=>{
         }
     );
     if(!res.ok) throw new HTTPException(400, { message: "code invaild" });
-    const { access_token } = await res.json();
-    c.set("jwtPayload", access_token);
+    const { access_token: token } = await res.json();
+    setCookie(c, "token", await sign({ token }, getEnv(c, "SECRET")));
     
     return c.redirect(`${getEnv(c, "CLIENT")}/home`);
 });

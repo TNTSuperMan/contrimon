@@ -12,6 +12,6 @@ const app = new Hono<{ Bindings: {
 }>}>();
 
 app.use("/user/*", async(c,n) => 
-    jwt({ secret: getEnv(c, "SECRET") })(c, n));
+    jwt({ secret: getEnv(c, "SECRET"), cookie: "token" })(c, n));
 
 export default app;
