@@ -1,0 +1,25 @@
+.contrimon{
+    font-family: monospace;
+    width: 100%;
+    height: calc(100% - 79px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p{
+        background: #222;
+        padding: 10px;
+        font-size: 15px;
+        border-radius: 10px;
+    }
+    div{
+        background: #fff;
+        color: #000;
+        border-radius: 7px;
+        cursor: pointer;
+        padding: 5px;
+        span{
+            pointer-events: none;
+        }
+    }
+}
