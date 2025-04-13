@@ -3,7 +3,6 @@ import app from "./app";
 
 app.get("/user/info", async c=>{
     const { token } = c.get("jwtPayload");
-    console.log(token);
     const res = await fetch(
         "https://api.github.com/user", {
         headers: { Authorization: `Bearer ${token}` }
