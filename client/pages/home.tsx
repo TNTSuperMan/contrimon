@@ -61,8 +61,7 @@ export default ()=>{
             ようこそ {info.name}さん
             <div class="contributes">
                 <span title="UTC時間">今日</span>のcontributions<br/>
-                { contributes instanceof Error ?
-                    (console.error(contributes),`エラー: ${contributes.name}`) :
+                { contributes instanceof Error ? "エラー" :
                 !contributes ? "読込中..." : <>
                     <div class="all" title="すべて">
                         {contributes.data.user.contributionsCollection.contributionCalendar.totalContributions}
