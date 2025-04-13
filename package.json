@@ -11,7 +11,7 @@
   "scripts": {
     "build": "mkdir -p dist && rm -r dist && bun build --outdir=dist --minify index.html",
     "dev": "bun --hot index.html",
-    "serve": "bun --port 4000 server"
+    "serve": "bun --hot --port 4000 server"
   },
   "dependencies": {
     "hono": "^4.7.6",
