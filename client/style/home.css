@@ -1,0 +1,16 @@
+.home{
+    width: 100%;
+    .bar{
+        display: flex;
+        flex-direction: row;
+        height: 50px;
+        justify-content: left;
+        border-bottom: 2px #000 solid;
+        a img{
+            height: calc(100% - 10px);
+            border: 1px black solid;
+            border-radius: 100%;
+            margin: 5px;
+        }
+    }
+}
