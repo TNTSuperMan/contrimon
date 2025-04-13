@@ -6,6 +6,7 @@ app.get("/oauth/:code", async c=>{
     if(!code) throw new HTTPException(400, { message: "code not specified" });
     const res = await fetch(
         "https://github.com/login/oauth/access_token", {
+            method: "POST",
             body: JSON.stringify({ code,
                 client_id: c.env.CLIENT_ID,
                 client_secret: c.env.CLIENT_SECRET,
