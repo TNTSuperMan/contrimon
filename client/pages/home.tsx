@@ -8,6 +8,15 @@ export default ()=>{
         name: string,
         html_url: string
     }>();
+    const [contributes, setContributes] = useState<Error|{
+        data: { user: { contributionsCollection: {
+            totalCommitContributions: number,
+            totalIssueContributions: number,
+            totalPullRequestContributions: number,
+            totalRepositoryContributions: number,
+            contributionCalendar: { totalContributions: number }
+        }}}
+    }>();
     useEffect(()=>{
         const jwt = localStorage.getItem("token");
         if(!jwt) route("/");
@@ -22,6 +31,17 @@ export default ()=>{
                 setInfo(new Error());
             }
         }).catch(e=>e instanceof Error ? setInfo(e) : setInfo(new Error(`${e}`, { cause: e })))
+        fetch(new URL("/user/contributes", SERVER), {
+            headers: {
+                Authorization: `Bearer ${jwt}`
+            }
+        }).then(async(e)=>{
+            if(e.ok){
+                setContributes(await e.json());
+            }else{
+                setContributes(new Error());
+            }
+        }).catch(e=>e instanceof Error ? setContributes(e) : setContributes(new Error(`${e}`, { cause: e })));
     }, []);
     if(!info) return <h1>読込中...</h1>;
     if(info instanceof Error){
@@ -37,6 +57,28 @@ export default ()=>{
                 <img src={info.avatar_url} alt={info.name} />
             </a>
             ようこそ {info.name}さん
+            <div class="contributes">
+                <span title="UTC時間">今日</span>のcontributions<br/>
+                { contributes instanceof Error ?
+                    (console.error(contributes),`エラー: ${contributes.name}`) :
+                !contributes ? "読込中..." : <>
+                    <div class="all" title="すべて">
+                        {contributes.data.user.contributionsCollection.contributionCalendar.totalContributions}
+                    </div>
+                    <div class="commit" title="コミット">
+                        {contributes.data.user.contributionsCollection.totalCommitContributions}
+                    </div>
+                    <div class="pull" title="PullRequest">
+                        {contributes.data.user.contributionsCollection.totalPullRequestContributions}
+                    </div>
+                    <div class="issue" title="Issue">
+                        {contributes.data.user.contributionsCollection.totalCommitContributions}
+                    </div>
+                    <div class="repo" title="新規リポジトリ">
+                        {contributes.data.user.contributionsCollection.totalRepositoryContributions}
+                    </div>
+                </>}
+            </div>
         </div>
     </div>
 }
