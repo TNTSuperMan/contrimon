@@ -82,6 +82,6 @@ export default ()=>{
                 </>}
             </div>
         </div>
-        <Contrimon/>
+        <Contrimon contributes={contributes}/>
     </div>
 }
