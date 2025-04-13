@@ -1,6 +1,16 @@
 import { useEffect, useState } from "preact/hooks";
 import { SERVER } from "../../env";
 import { route } from "preact-router";
+import { Contrimon } from "../contrimon/contrimon";
+
+export type ContributesState = {
+    data: { user: { contributionsCollection: {
+        totalCommitContributions: number,
+        totalIssueContributions: number,
+        totalPullRequestContributions: number,
+        totalRepositoryContributions: number,
+        contributionCalendar: { totalContributions: number }
+}}}};
 
 export default ()=>{
     const [info, setInfo] = useState<Error|{
@@ -8,15 +18,7 @@ export default ()=>{
         name: string,
         html_url: string
     }>();
-    const [contributes, setContributes] = useState<Error|{
-        data: { user: { contributionsCollection: {
-            totalCommitContributions: number,
-            totalIssueContributions: number,
-            totalPullRequestContributions: number,
-            totalRepositoryContributions: number,
-            contributionCalendar: { totalContributions: number }
-        }}}
-    }>();
+    const [contributes, setContributes] = useState<Error|ContributesState>();
     useEffect(()=>{
         const jwt = localStorage.getItem("token");
         if(!jwt) route("/");
@@ -80,5 +82,6 @@ export default ()=>{
                 </>}
             </div>
         </div>
+        <Contrimon/>
     </div>
 }
