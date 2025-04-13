@@ -9,9 +9,7 @@ const app = new Hono<{ Bindings: {
     SECRET: string
 }, Variables: JwtVariables<string>}>();
 
-app.use("*", async(c,n) => 
-    c.req.path.startsWith("/oauth/") ?
-        await n() :
-        jwt({ secret: getEnv(c, "SECRET") })(c, n));
+app.use("/user/*", async(c,n) => 
+    jwt({ secret: getEnv(c, "SECRET") })(c, n));
 
 export default app;
