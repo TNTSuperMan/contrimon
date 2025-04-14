@@ -13,8 +13,8 @@ export const Contrimon = ({contributes}: {contributes: Error | ContributesState 
         }
     }, [contributes]);
 
-    return <div class="contrimon">
+    return <div class="contrimon">{ !contributes ? <></> : <>
         <p>{msg}</p>
         <span>{face}</span>
-    </div>
+    </>}</div>
 }
