@@ -43,6 +43,9 @@
             div.issue::before{
                 content: "!";
             }
+            div.review::before{
+                content: "✓";
+            }
             div.repo::before{
                 content: "+";
             }

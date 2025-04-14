@@ -9,6 +9,7 @@ export type ContributesState = {
         totalIssueContributions: number,
         totalPullRequestContributions: number,
         totalRepositoryContributions: number,
+        totalPullRequestReviewContributions: number,
         contributionCalendar: { totalContributions: number }
 }}}};
 
@@ -74,6 +75,9 @@ export default ()=>{
                     </div>
                     <div class="issue" title="Issue">
                         {contributes.data.user.contributionsCollection.totalIssueContributions}
+                    </div>
+                    <div class="review" title="コードレビュー">
+                        {contributes.data.user.contributionsCollection.totalPullRequestReviewContributions}
                     </div>
                     <div class="repo" title="新規リポジトリ">
                         {contributes.data.user.contributionsCollection.totalRepositoryContributions}
