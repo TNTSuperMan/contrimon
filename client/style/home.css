@@ -32,22 +32,22 @@
                 border-radius: 4px;
             }
             div.all::before{
-                content: "*";
+                content: "＊";
             }
             div.commit::before{
                 content: "</>";
             }
             div.pull::before{
-                content: "/|";
+                content: "ｈ";
             }
             div.issue::before{
-                content: "!";
+                content: "！";
             }
             div.review::before{
                 content: "✓";
             }
             div.repo::before{
-                content: "+";
+                content: "＋";
             }
         }
     }
