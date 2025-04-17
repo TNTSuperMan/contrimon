@@ -1,6 +1,7 @@
 import { useEffect, useState } from "preact/hooks"
 import type { ContributesState } from "../pages/home";
 import { data } from "./data";
+import { savedata } from "./savedata";
 
 export const Contrimon = ({contributes}: {contributes: Error | ContributesState | void}) => {
     const [face, setFace] = useState("-_-");
