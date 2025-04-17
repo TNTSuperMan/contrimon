@@ -16,6 +16,7 @@
   "dependencies": {
     "hono": "^4.7.6",
     "preact": "^10.26.5",
-    "preact-router": "^4.1.2"
+    "preact-router": "^4.1.2",
+    "zod": "^3.24.3"
   }
 }
