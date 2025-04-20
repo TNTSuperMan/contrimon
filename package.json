@@ -11,7 +11,7 @@
     "typescript": "^5"
   },
   "scripts": {
-    "build": "mkdir -p dist && rm -r dist && bun build --outdir=dist --minify --env=PUBLIC_* index.html",
+    "build": "mkdir -p dist && rm -r dist && bun build --outdir=dist/client --minify --env=PUBLIC_* index.html",
     "build-server": "bun build --target=node --minify --outdir=dist/server ./server/index.ts",
     "dev": "bun --hot index.html",
     "serve": "bun --hot --port 4000 server"
