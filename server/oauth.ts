@@ -20,7 +20,10 @@ app.get("/oauth/:code", async c=>{
             }
         }
     );
-    if(!res.ok) throw new HTTPException(400, { message: "code invaild" });
+    const json = await res.json();
+    if(json.error)
+        throw new HTTPException(400, {
+            message: `OAuth error: ${JSON.stringify(json)}` });
     return c.text(await encodeToken(c,
-        (await res.json()).access_token));
+        json.access_token));
 });
