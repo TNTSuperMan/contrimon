@@ -23,10 +23,10 @@ export default () => {
         fetch(new URL(`/oauth/${param.get("code")}`, process.env.PUBLIC_SERVER), {
             method: "POST"
         }).then(async e=>{
-                if(!e.ok) return setState("OAuth認証に失敗しました: " + await e.text());
-                localStorage.setItem("token", await e.text());
-                route("/home")
-            })
+            if(!e.ok) return setState("OAuth認証に失敗しました: " + await e.text());
+            localStorage.setItem("token", await e.text());
+            route("/home")
+        }).catch(e=>setState("OAuth通信に失敗しました: " + (e instanceof Error ? e.stack : String(e))))
     }, []);
     return <h1>{state}</h1>
 };
