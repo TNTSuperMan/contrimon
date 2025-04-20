@@ -9,7 +9,7 @@ const app = new Hono<{ Bindings: Env, Variables: JwtVariables<{
 
 app.use("*", (c,n) => cors({
     origin: getEnv(c, "CLIENT"),
-    allowMethods: ["POST", "OPTIONS"],
+    allowMethods: ["GET", "POST", "OPTIONS"],
     allowHeaders: ["X-Custom-Header", "Upgrade-Insecure-Requests", "Content-type", "Authorization"],
     exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
     credentials: true
