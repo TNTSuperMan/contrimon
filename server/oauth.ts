@@ -3,7 +3,7 @@ import app from "./app";
 import { getEnv } from "./utils/env";
 import { encodeToken } from "./utils/token";
 
-app.get("/oauth/:code", async c=>{
+app.post("/oauth/:code", async c=>{
     const { code } = c.req.param();
     if(!code) throw new HTTPException(400, { message: "code not specified" });
     const res = await fetch(
