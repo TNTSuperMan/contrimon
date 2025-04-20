@@ -3,6 +3,7 @@
   "type": "module",
   "private": true,
   "devDependencies": {
+    "@types/aes-js": "^3.1.4",
     "@types/bun": "latest",
     "@types/crypto-js": "^4.2.2",
     "wrangler": "^4.12.0"
