@@ -17,4 +17,14 @@ export default () => <>
             TypeScript programmer
         </div>
     </div>
+    <h2>Credit</h2>
+    <div class="credits">
+        <a target="_blank" href="https://www.typescriptlang.org/">TypeScript</a>
+        <a target="_blank" href="https://bun.sh/docs/project/licensing">Bun</a>
+        <a target="_blank" href="https://hono.dev">Hono</a>
+        <a target="_blank" href="https://zod.dev/">Zod</a>
+        <a target="_blank" href="https://preactjs.com/">Preact</a>
+        <a target="_blank" href="https://github.com/preactjs/preact-router">preact-router</a>
+        <a target="_blank" href="https://github.com/brix/crypto-js">crypto-js</a>
+    </div>
 </>;
