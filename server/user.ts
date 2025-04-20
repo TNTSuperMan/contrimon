@@ -3,7 +3,7 @@ import app from "./app";
 import { getToken } from "./utils/token";
 
 app.get("/user/info", async c=>{
-    const { token } = c.get("jwtPayload");
+    const token = getToken(c);
     const res = await fetch(
         "https://api.github.com/user", {
         headers: { Authorization: `Bearer ${token}` }
