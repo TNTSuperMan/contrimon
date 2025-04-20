@@ -7,7 +7,8 @@ const app = new Hono<{ Bindings: {
     CLIENT_ID: string,
     CLIENT_SECRET: string,
     CLIENT: string,
-    SECRET: string
+    SECRET: string,
+    ENC_SECRET: string,
 }, Variables: JwtVariables<{
     token: string
 }>}>();
