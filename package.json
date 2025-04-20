@@ -17,6 +17,7 @@
     "serve": "bun --hot --port 4000 server"
   },
   "dependencies": {
+    "aes-js": "^3.1.2",
     "crypto-js": "^4.2.0",
     "hono": "^4.7.6",
     "preact": "^10.26.5",
