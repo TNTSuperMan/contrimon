@@ -1,7 +1,7 @@
 import type { Context } from "hono";
 import { sign } from "hono/jwt";
 import { getEnv } from "./env";
-import { AES } from "crypto-js";
+import { ModeOfOperation, utils } from "aes-js";
 
 const key = (c: Context) =>
     new Uint8Array(
@@ -11,19 +11,12 @@ const key = (c: Context) =>
 
 export const encodeToken = (c: Context, token: string) =>
     sign({
-        token: AES.encrypt(token, getEnv(c, "ENC_SECRET")).toString()
+        token: utils.hex.fromBytes(new ModeOfOperation.ctr(key(c)).encrypt(utils.utf8.toBytes(token)))
     }, getEnv(c, "SECRET"));
     
 export const getToken = (c: Context) =>
-    String.fromCharCode(...
-        AES.decrypt(
-            c.get("jwtPayload").token,
-            getEnv(c, "ENC_SECRET"))
-        .toString()
-        .split("")
-        .reduce<string[]>(((v,c,i)=>(
-            i % 2 ?
-                v[v.length-1] += c :
-                v.push(c),v
-        )),[])
-        .map(e=>parseInt(e,16)));
+    utils.utf8.fromBytes(
+        new ModeOfOperation.ctr(key(c)).decrypt(
+            utils.hex.toBytes(c.get("jwtPayload").token)
+        )
+    );
