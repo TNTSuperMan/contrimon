@@ -1,0 +1,19 @@
+.profile-card{
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    padding: 5px;
+    justify-content: left;
+    background: #333;
+    border-radius: 20px;
+    a img{
+        height: calc(100% - 10px);
+        border-radius: 100%;
+        margin: 5px;
+    }
+    .profile{
+        margin: 10px;
+        width: min-content;
+        h3{ margin: 0; }
+    }
+}
