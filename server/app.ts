@@ -4,7 +4,7 @@ import { getEnv } from "./utils/env";
 import { cors } from "hono/cors";
 
 const app = new Hono<{ Bindings: {
-    CLIENT_ID: string,
+    PUBLIC_CLIENT_ID: string,
     CLIENT_SECRET: string,
     CLIENT: string,
     SECRET: string,
@@ -14,7 +14,7 @@ const app = new Hono<{ Bindings: {
 }>}>();
 
 app.use("*", (c,n) => cors({
-    origin: getEnv(c, "CLIENT"),
+    origin: getEnv(c, "PUB_CLIENT"),
     allowMethods: ["POST", "OPTIONS"],
     allowHeaders: ["X-Custom-Header", "Upgrade-Insecure-Requests", "Content-type", "Authorization"],
     exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],

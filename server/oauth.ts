@@ -10,7 +10,7 @@ app.get("/oauth/:code", async c=>{
         "https://github.com/login/oauth/access_token", {
             method: "POST",
             body: JSON.stringify({ code,
-                client_id: getEnv(c, "CLIENT_ID"),
+                client_id: getEnv(c, "PUBLIC_CLIENT_ID"),
                 client_secret: getEnv(c, "CLIENT_SECRET"),
                 redirect_uri: `${getEnv(c, "CLIENT")}/home`
             }),
