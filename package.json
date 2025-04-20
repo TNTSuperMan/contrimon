@@ -10,7 +10,7 @@
     "typescript": "^5"
   },
   "scripts": {
-    "build": "mkdir -p dist && rm -r dist && bun build --outdir=dist --minify index.html",
+    "build": "mkdir -p dist && rm -r dist && bun build --outdir=dist --minify --env=PUBLIC_* index.html",
     "dev": "bun --hot index.html",
     "serve": "bun --hot --port 4000 server"
   },
