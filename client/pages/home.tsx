@@ -3,88 +3,72 @@ import { SERVER } from "../../env";
 import { route } from "preact-router";
 import { Contrimon } from "../contrimon/contrimon";
 
-export type ContributesState = {
-    data: { user: { contributionsCollection: {
+export type UserInfo = {
+    avatarUrl: string,
+    name: string,
+    url: string,
+    contributionsCollection: {
         totalCommitContributions: number,
         totalIssueContributions: number,
         totalPullRequestContributions: number,
         totalRepositoryContributions: number,
         totalPullRequestReviewContributions: number,
         contributionCalendar: { totalContributions: number }
-}}}};
+}};
 
 export default ()=>{
-    const [info, setInfo] = useState<Error|{
-        avatar_url: string,
-        name: string,
-        html_url: string
-    }>();
-    const [contributes, setContributes] = useState<Error|ContributesState>();
+    const [infos, setInfos] = useState<Error|UserInfo>();
     useEffect(()=>{
         const jwt = localStorage.getItem("token");
         if(!jwt) route("/");
-        fetch(new URL("/user/info", SERVER), {
+        fetch(new URL("/user/infos", SERVER), {
             headers: {
                 Authorization: `Bearer ${jwt}`
             }
         }).then(async(e)=>{
             if(e.ok){
-                setInfo(await e.json());
+                setInfos((await e.json()).data.user);
             }else{
-                setInfo(new Error());
+                setInfos(new Error());
             }
-        }).catch(e=>e instanceof Error ? setInfo(e) : setInfo(new Error(`${e}`, { cause: e })))
-        fetch(new URL("/user/contributes", SERVER), {
-            headers: {
-                Authorization: `Bearer ${jwt}`
-            }
-        }).then(async(e)=>{
-            if(e.ok){
-                setContributes(await e.json());
-            }else{
-                setContributes(new Error());
-            }
-        }).catch(e=>e instanceof Error ? setContributes(e) : setContributes(new Error(`${e}`, { cause: e })));
+        }).catch(e=>e instanceof Error ? setInfos(e) : setInfos(new Error(`${e}`, { cause: e })));
     }, []);
-    if(!info) return <h1>読込中...</h1>;
-    if(info instanceof Error){
-        console.error(info);
+    if(!infos) return <h1>読込中...</h1>;
+    if(infos instanceof Error){
+        console.error(infos);
         return <>
-            <h1>エラー: {info.name}</h1>
-            {info.stack ?? info.message}
+            <h1>エラー: {infos.name}</h1>
+            {infos.stack ?? infos.message}
         </>;
     }
     return <div class="home">
         <div className="bar">
-            <a href={info.html_url} target="_blank">
-                <img src={info.avatar_url} alt={info.name} />
+            <a href={infos.url} target="_blank">
+                <img src={infos.avatarUrl} alt={infos.name} />
             </a>
-            ようこそ {info.name}さん
+            ようこそ {infos.name}さん
             <div class="contributes">
                 <span title="UTC時間">今日</span>のcontributions<br/>
-                { contributes instanceof Error ? "エラー" :
-                !contributes ? "読込中..." : <>
-                    <div class="all" title="すべて">
-                        {contributes.data.user.contributionsCollection.contributionCalendar.totalContributions}
+                <div class="all" title="すべて">
+                        {infos.contributionsCollection.contributionCalendar.totalContributions}
                     </div>
                     <div class="commit" title="コミット">
-                        {contributes.data.user.contributionsCollection.totalCommitContributions}
+                        {infos.contributionsCollection.totalCommitContributions}
                     </div>
                     <div class="pull" title="PullRequest">
-                        {contributes.data.user.contributionsCollection.totalPullRequestContributions}
+                        {infos.contributionsCollection.totalPullRequestContributions}
                     </div>
                     <div class="issue" title="Issue">
-                        {contributes.data.user.contributionsCollection.totalIssueContributions}
+                        {infos.contributionsCollection.totalIssueContributions}
                     </div>
                     <div class="review" title="コードレビュー">
-                        {contributes.data.user.contributionsCollection.totalPullRequestReviewContributions}
+                        {infos.contributionsCollection.totalPullRequestReviewContributions}
                     </div>
                     <div class="repo" title="新規リポジトリ">
-                        {contributes.data.user.contributionsCollection.totalRepositoryContributions}
+                        {infos.contributionsCollection.totalRepositoryContributions}
                     </div>
-                </>}
             </div>
         </div>
-        <Contrimon contributes={contributes}/>
+        <Contrimon contributes={infos}/>
     </div>
 }
