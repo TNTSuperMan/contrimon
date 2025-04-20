@@ -1,5 +1,4 @@
 import { useEffect, useState } from "preact/hooks";
-import { SERVER } from "../../env";
 import { route } from "preact-router";
 import { Contrimon } from "../contrimon/contrimon";
 
@@ -21,7 +20,7 @@ export default ()=>{
     useEffect(()=>{
         const jwt = localStorage.getItem("token");
         if(!jwt) route("/");
-        fetch(new URL("/user/infos", SERVER), {
+        fetch(new URL("/user/infos", process.env.PUBLIC_SERVER), {
             headers: {
                 Authorization: `Bearer ${jwt}`
             }
