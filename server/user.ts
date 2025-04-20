@@ -1,5 +1,6 @@
 import { HTTPException } from "hono/http-exception";
 import app from "./app";
+import { getToken } from "./utils/token";
 
 app.get("/user/info", async c=>{
     const { token } = c.get("jwtPayload");
@@ -12,7 +13,7 @@ app.get("/user/info", async c=>{
 });
 
 app.get("/user/contributes", async c=>{
-    const { token } = c.get("jwtPayload");
+    const token = getToken(c);
     const infores = await fetch(
         "https://api.github.com/user", {
         headers: { Authorization: `Bearer ${token}` }

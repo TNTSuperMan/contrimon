@@ -1,7 +1,7 @@
 import { HTTPException } from "hono/http-exception";
 import app from "./app";
 import { getEnv } from "./utils/env";
-import { sign } from "hono/jwt";
+import { encodeToken } from "./utils/token";
 
 app.get("/oauth/:code", async c=>{
     const { code } = c.req.param();
@@ -21,7 +21,6 @@ app.get("/oauth/:code", async c=>{
         }
     );
     if(!res.ok) throw new HTTPException(400, { message: "code invaild" });
-    const { access_token: token } = await res.json();
-
-    return c.text(await sign({ token }, getEnv(c, "SECRET")));
+    return c.text(await encodeToken(c,
+        (await res.json()).access_token));
 });
