@@ -7,13 +7,13 @@ const app = new Hono<{ Bindings: Env, Variables: JwtVariables<{
     token: string
 }>}>();
 
-app.use("*", (c,n) => cors({
-    origin: getEnv(c, "CLIENT"),
+app.use("*", cors({
+    origin: (origin, c) => getEnv(c, "CLIENT") == origin ? origin : null,
     allowMethods: ["GET", "POST", "OPTIONS"],
     allowHeaders: ["X-Custom-Header", "Upgrade-Insecure-Requests", "Content-type", "Authorization"],
     exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
     credentials: true
-})(c,n))
+}))
 
 app.use("/user/*", async(c,n) => 
     jwt({ secret: getEnv(c, "SECRET")})(c, n));
