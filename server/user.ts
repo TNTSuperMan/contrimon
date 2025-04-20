@@ -2,17 +2,7 @@ import { HTTPException } from "hono/http-exception";
 import app from "./app";
 import { getToken } from "./utils/token";
 
-app.get("/user/info", async c=>{
-    const token = getToken(c);
-    const res = await fetch(
-        "https://api.github.com/user", {
-        headers: { Authorization: `Bearer ${token}` }
-    });
-    if(!res.ok) throw new HTTPException(400, { message: "Failed to get user" });
-    return c.json(await res.json());
-});
-
-app.get("/user/contributes", async c=>{
+app.get("/user/infos", async c=>{
     const token = getToken(c);
     const infores = await fetch(
         "https://api.github.com/user", {
@@ -31,6 +21,9 @@ app.get("/user/contributes", async c=>{
         body: JSON.stringify({query:`
             query {
                 user(login: "${info.name}") {
+                    avatarUrl
+                    name
+                    url
                     contributionsCollection(from: "${todayBegin.toISOString()}") {
                         totalCommitContributions
                         totalIssueContributions
