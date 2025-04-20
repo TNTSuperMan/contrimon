@@ -8,5 +8,5 @@ export type Env = {
     ENC_SECRET: string,
 }
 
-export const getEnv = (c: Context, name: keyof Env) =>
-    process.isBun ? process.env[name] : c.env[name];
+export const getEnv = (c: Context, name: keyof Env): string =>
+    process.isBun ? process.env[name] ?? "" : c.env[name];
