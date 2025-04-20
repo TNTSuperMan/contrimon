@@ -2,7 +2,7 @@ import { HTTPException } from "hono/http-exception";
 import app from "./app";
 import { getToken } from "./utils/token";
 
-app.get("/user/infos", async c=>{
+app.post("/user/infos", async c=>{
     const token = getToken(c);
     const infores = await fetch(
         "https://api.github.com/user", {
