@@ -14,7 +14,7 @@ const app = new Hono<{ Bindings: {
 }>}>();
 
 app.use("*", (c,n) => cors({
-    origin: getEnv(c, "PUB_CLIENT"),
+    origin: getEnv(c, "CLIENT"),
     allowMethods: ["POST", "OPTIONS"],
     allowHeaders: ["X-Custom-Header", "Upgrade-Insecure-Requests", "Content-type", "Authorization"],
     exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
