@@ -8,7 +8,7 @@ app.post("/user/infos", async c=>{
         "https://api.github.com/user", {
         headers: { Authorization: `Bearer ${token}` }
     });
-    if(!infores.ok) throw new HTTPException(400, { message: "Failed to get user" });
+    if(!infores.ok) throw new HTTPException(400, { message: "Failed to get user: " + await infores.text() });
     const info = await infores.json();
 
     const now = new Date();
