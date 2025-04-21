@@ -15,7 +15,7 @@
     "build-client": "bun build --target=browser --minify --outdir=dist/client --env=PUBLIC_* --chunk-naming=[name].[ext] index.html",
     "build-server": "bun build --target=node    --minify --outdir=dist/server ./server/index.ts",
     "dev": "bun --hot index.html",
-    "serve": "bun --hot --port 4000 server"
+    "serve": "wrangler dev server/index.ts"
   },
   "dependencies": {
     "aes-js": "^3.1.2",
