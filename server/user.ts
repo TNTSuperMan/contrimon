@@ -6,7 +6,10 @@ app.post("/user/infos", async c=>{
     const token = getToken(c);
     const infores = await fetch(
         "https://api.github.com/user", {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "User-Agent": c.req.header("User-Agent") ?? ""
+        }
     });
     if(!infores.ok) throw new HTTPException(400, { message: "Failed to get user: " + await infores.text() });
     const info = await infores.json();
@@ -17,7 +20,10 @@ app.post("/user/infos", async c=>{
     const res = await fetch(
         "https://api.github.com/graphql", {
         method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "User-Agent": c.req.header("User-Agent") ?? ""
+        },
         body: JSON.stringify({query:`
             query {
                 user(login: "${info.name}") {
