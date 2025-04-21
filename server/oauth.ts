@@ -1,6 +1,5 @@
 import { HTTPException } from "hono/http-exception";
 import app from "./app";
-import { getEnv } from "./utils/env";
 import { encodeToken } from "./utils/token";
 
 app.post("/oauth/:code", async c=>{
@@ -10,9 +9,9 @@ app.post("/oauth/:code", async c=>{
         "https://github.com/login/oauth/access_token", {
             method: "POST",
             body: JSON.stringify({ code,
-                client_id: getEnv(c, "PUBLIC_CLIENT_ID"),
-                client_secret: getEnv(c, "CLIENT_SECRET"),
-                redirect_uri: `${getEnv(c, "CLIENT")}/home`
+                client_id: c.env.PUBLIC_CLIENT_ID,
+                client_secret: c.env.CLIENT_SECRET,
+                redirect_uri: `${c.env.CLIENT}/home`
             }),
             headers: {
                 "Content-type": "application/json",
