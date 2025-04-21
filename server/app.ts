@@ -1,7 +1,14 @@
 import { Hono } from "hono";
 import { jwt, type JwtVariables } from "hono/jwt";
-import { type Env } from "./utils/env";
 import { cors } from "hono/cors";
+
+type Env = {
+    PUBLIC_CLIENT_ID: string,
+    CLIENT_SECRET: string,
+    CLIENT: string,
+    SECRET: string,
+    ENC_SECRET: string,
+}
 
 const app = new Hono<{ Bindings: Env, Variables: JwtVariables<{
     token: string
