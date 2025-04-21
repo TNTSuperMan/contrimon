@@ -3,7 +3,7 @@ import { jwt, type JwtVariables } from "hono/jwt";
 import { cors } from "hono/cors";
 
 type Env = {
-    PUBLIC_CLIENT_ID: string,
+    CLIENT_ID: string,
     CLIENT_SECRET: string,
     CLIENT: string,
     SECRET: string,

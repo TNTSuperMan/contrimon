@@ -9,7 +9,7 @@ app.post("/oauth/:code", async c=>{
         "https://github.com/login/oauth/access_token", {
             method: "POST",
             body: JSON.stringify({ code,
-                client_id: c.env.PUBLIC_CLIENT_ID,
+                client_id: c.env.CLIENT_ID,
                 client_secret: c.env.CLIENT_SECRET,
                 redirect_uri: `${c.env.CLIENT}/home`
             }),
