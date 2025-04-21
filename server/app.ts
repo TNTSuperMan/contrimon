@@ -10,9 +10,13 @@ type Env = {
     ENC_SECRET: string,
 }
 
-const app = new Hono<{ Bindings: Env, Variables: JwtVariables<{
-    token: string
-}>}>();
+export type HonoEnv = {
+    Bindings: Env,
+    Variables: JwtVariables<{
+        token: string
+}>}
+
+const app = new Hono<HonoEnv>();
 
 app.use("*", cors({
     origin: (origin, c) => c.env.CLIENT == origin ? origin : null,
