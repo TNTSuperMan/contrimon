@@ -2,8 +2,8 @@ import { HTTPException } from "hono/http-exception";
 import app from "./app";
 import { encodeToken } from "./utils/token";
 
-app.post("/oauth/:code", async c=>{
-    const { code } = c.req.param();
+app.post("/oauth", async c=>{
+    const code = c.req.header("Authorization");
     if(!code) throw new HTTPException(400, { message: "code not specified" });
     const res = await fetch(
         "https://github.com/login/oauth/access_token", {
