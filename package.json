@@ -12,7 +12,7 @@
     "typescript": "^5"
   },
   "scripts": {
-    "build-client": "bun build --target=browser --minify --outdir=dist/client --env=PUBLIC_* --chunk-naming=[name].[ext] index.html",
+    "build-client": "bun build --target=browser --minify --outdir=dist/client --env=inline --chunk-naming=[name].[ext] index.html",
     "build-server": "bun build --target=node    --minify --outdir=dist/server ./server/index.ts",
     "dev": "bun --hot index.html",
     "serve": "wrangler dev server/index.ts"
