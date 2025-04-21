@@ -20,7 +20,7 @@ export default () => {
     const [state, setState] = useState("読込中...");
     useEffect(()=>{
         console.log("start")
-        fetch(new URL(`/oauth/${param.get("code")}`, process.env.PUBLIC_SERVER), {
+        fetch(new URL(`/oauth/${param.get("code")}`, process.env.SERVER), {
             method: "POST"
         }).then(async e=>{
             if(!e.ok) return setState("OAuth認証に失敗しました: " + await e.text());

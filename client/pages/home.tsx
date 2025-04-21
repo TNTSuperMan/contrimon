@@ -20,7 +20,7 @@ export default ()=>{
     useEffect(()=>{
         const jwt = localStorage.getItem("token");
         if(!jwt) route("/");
-        fetch(new URL("/user/infos", process.env.PUBLIC_SERVER), {
+        fetch(new URL("/user/infos", process.env.SERVER), {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${jwt}`
