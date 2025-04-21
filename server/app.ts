@@ -19,7 +19,7 @@ export type HonoEnv = {
 const app = new Hono<HonoEnv>();
 
 app.use("*", cors({
-    origin: (origin, c) => origin,
+    origin: (origin, c) => c.env.CLIENT,
     allowMethods: ["GET", "POST", "OPTIONS"],
     allowHeaders: ["X-Custom-Header", "Upgrade-Insecure-Requests", "Content-type", "Authorization"],
     exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
