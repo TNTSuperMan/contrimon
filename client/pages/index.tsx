@@ -23,6 +23,6 @@ export default () => <>
         <a target="_blank" href="https://zod.dev/">Zod</a>
         <a target="_blank" href="https://preactjs.com/">Preact</a>
         <a target="_blank" href="https://github.com/preactjs/preact-router">preact-router</a>
-        <a target="_blank" href="https://github.com/brix/crypto-js">crypto-js</a>
+        <a target="_blank" href="https://github.com/ricmoo/aes-js">aes-js</a>
     </div>
 </>;
