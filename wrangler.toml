@@ -1,3 +1,6 @@
 name = "contrimon-server"
 main = "dist/server/index.js"
 compatibility_date = "2024-04-20"
+
+[vars]
+CLIENT = "https://contrimon.pages.dev"
