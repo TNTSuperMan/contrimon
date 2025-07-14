@@ -22,7 +22,7 @@ app.post("/oauth", async c=>{
     const json = await res.json();
     if(json.error)
         throw new HTTPException(400, {
-            message: `OAuth error: ${JSON.stringify(json)}` });
+            message: `OAuth error` });
     return c.text(await encodeToken(c,
         json.access_token));
 });
