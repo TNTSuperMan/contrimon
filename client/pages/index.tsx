@@ -1,10 +1,13 @@
 export default () => <>
     <h1>contrimon</h1>
     <span>より貢献したくなる。</span>
-    <button class="btn" onClick={()=>location.href =
-        `https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${
-        encodeURIComponent(new URL("/oauth", location.origin).toString())}`
-    }>始める</button>
+    <button class="btn" onClick={()=>{
+        const state = crypto.randomUUID();
+        sessionStorage.setItem("oauth_state", state);
+        location.href =
+            `https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${
+            encodeURIComponent(new URL("/oauth", location.origin).toString())}&state=${encodeURIComponent(state)}`
+    }}>始める</button>
     <h2>Developer</h2>
     <div class="profile-card">
         <a href="https://github.com/TNTSuperMan" target="_blank">

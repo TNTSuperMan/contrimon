@@ -25,12 +25,12 @@ app.post("/user/infos", async c=>{
             "User-Agent": c.req.header("User-Agent") ?? ""
         },
         body: JSON.stringify({query:`
-            query {
-                user(login: "${info.name}") {
+            query($login: String!, $from: DateTime!) {
+                user(login: $login) {
                     avatarUrl
                     name
                     url
-                    contributionsCollection(from: "${todayBegin.toISOString()}") {
+                    contributionsCollection(from: $from) {
                         totalCommitContributions
                         totalIssueContributions
                         totalPullRequestContributions
@@ -42,7 +42,11 @@ app.post("/user/infos", async c=>{
                     }
                 }
             }
-        `})
+        `,
+        variables: {
+            login: info.login,
+            from: todayBegin.toISOString()
+        }})
     })
     if(!res.ok){
         console.log(res.status, res.statusText);

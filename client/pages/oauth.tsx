@@ -3,6 +3,16 @@ import { useEffect, useState } from "preact/hooks";
 
 export default () => {
     const param = new URLSearchParams(location.search);
+    const expectedState = sessionStorage.getItem("oauth_state");
+    const returnedState = param.get("state");
+    sessionStorage.removeItem("oauth_state");
+    if(!param.has("error") && (!expectedState || returnedState !== expectedState)){
+        return <>
+            <h1>OAuth認証に失敗しました</h1>
+            <p>認証リクエストの状態が一致しません。もう一度お試しください。</p>
+            <Link class="btn" href="/">ホーム</Link>
+        </>
+    }
     if(param.has("error")){
         if(param.get("error") == "access_denied"){
             return <>
